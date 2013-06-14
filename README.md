@@ -1,5 +1,12 @@
 # Observium Sensors
 
+Installation
+---------------
+To install these sensors you can select specific files or use all of them.  Just copy the `/includes/discovery` to your current installation.  Observium will automatically load them through the next discovery.
+
+You do not need to use the included `/includes/defaults.inc.php` file but you will need to comment or remove any required lines specified below.
+
+___
 #### Delta UPS 
 
 > You must use the included `/includes/defaults.inc.php` or modify your current one and comment out or remove line 598 (remove rf1628 association) or you will have duplicate sensors.
