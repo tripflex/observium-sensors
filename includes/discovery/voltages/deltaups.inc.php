@@ -51,7 +51,9 @@ if ($device['os'] == "deltaups")
   foreach ($dupsVoltage as $eachArray => $eachValue) {
     $current = snmp_get($device, $eachValue['OID'], "-O vq");
     $index = substr(strstr($eachValue['OID'], '2254.2.4'), 9);
-    discover_sensor($valid['sensor'], 'voltage', $device, $eachValue['OID'], $index, "DeltaUPS", $eachValue['descr'], $eachValue['divisor'], '1', NULL, NULL, NULL, NULL, $current);
+        if($current != "NULL" ){
+            discover_sensor($valid['sensor'], 'voltage', $device, $eachValue['OID'], $index, "DeltaUPS", $eachValue['descr'], $eachValue['divisor'], '1', NULL, NULL, NULL, NULL, $current);
+        }
   }
 }
 
