@@ -6,6 +6,9 @@ To install these sensors you can select specific files or use all of them.  Just
 
 You do not need to use the included `/includes/defaults.inc.php` file but you will need to comment or remove any required lines specified below.
 
+Force discovery:
+`./discovery.php -h all`
+
 ___
 #### Delta UPS 
 
