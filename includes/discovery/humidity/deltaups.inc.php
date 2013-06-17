@@ -6,8 +6,8 @@
 // @device deltaups
 // ------------------------------------------------------------------------------------------
 // @author Myles McNamara
-// @date 6.13.2013
-// @version 1.0
+// @date 6.17.2013
+// @version 1.1
 // @source https://gh.smyl.es/observium-sensors
 // ------------------------------------------------------------------------------------------
 // @file deltaups.inc.php
@@ -36,13 +36,18 @@ if ($device['os'] == "deltaups")
                             divisor => 1
                         )
              );
-  foreach ($dupsHumidity as $eachArray => $eachValue) {
+  foreach ($dupsHumidity as $eachArray => $eachValue)
+  {
+    // DeltaUPS does not have tables, so no need to walk, only need snmpget
     $current = snmp_get($device, $eachValue['OID'], "-O vq");
-    $index = substr(strstr($eachValue['OID'], '2254.2.4'), 9);
-      if($current != "NULL" ){
+    // Get index values from current OID
+    $preIndex = strstr($eachValue['OID'], '2254.2.4');
+    // Format and strip index to only include everything after 2254.2.4
+    $index = substr($preIndex, 9);
+      // Prevent NULL returned values from being added as sensors
+      if($current != "NULL" )
+      {
         discover_sensor($valid['sensor'], 'humidity', $device, $eachValue['OID'], $index, "DeltaUPS", $eachValue['descr'], $eachValue['divisor'], '1', NULL, NULL, NULL, NULL, $current);
       }
   }
 }
-
-?>

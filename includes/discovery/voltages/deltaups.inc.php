@@ -48,13 +48,18 @@ if ($device['os'] == "deltaups")
                             divisor => 10
                         )
              );
-  foreach ($dupsVoltage as $eachArray => $eachValue) {
+  foreach ($dupsVoltage as $eachArray => $eachValue)
+  {
+    // DeltaUPS does not have tables, so no need to walk, only need snmpget
     $current = snmp_get($device, $eachValue['OID'], "-O vq");
-    $index = substr(strstr($eachValue['OID'], '2254.2.4'), 9);
-        if($current != "NULL" ){
-            discover_sensor($valid['sensor'], 'voltage', $device, $eachValue['OID'], $index, "DeltaUPS", $eachValue['descr'], $eachValue['divisor'], '1', NULL, NULL, NULL, NULL, $current);
-        }
+    // Get index values from current OID
+    $preIndex = strstr($eachValue['OID'], '2254.2.4');
+    // Format and strip index to only include everything after 2254.2.4
+    $index = substr($preIndex, 9);
+      // Prevent NULL returned values from being added as sensors
+      if($current != "NULL" )
+      {
+          discover_sensor($valid['sensor'], 'voltage', $device, $eachValue['OID'], $index, "DeltaUPS", $eachValue['descr'], $eachValue['divisor'], '1', NULL, NULL, NULL, NULL, $current);
+      }
   }
 }
-
-?>
