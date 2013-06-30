@@ -10,7 +10,7 @@ Force discovery:
 `./discovery.php -h all`
 
 ___
-#### Delta UPS 
+#### Delta UPS (has been pushed to current SVN repo)
 
 > You must use the included `/includes/defaults.inc.php` or modify your current one and comment out or remove line 598 (remove rf1628 association) or you will have duplicate sensors.
 
